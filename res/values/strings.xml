@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="hello">Hello World, Learning!</string>
+    <string name="app_name">Learning</string>
+    <string name="Second_Screen_Title">My second page</string>
+    <string name="First_Screen_Title">First page title</string>
+    <string name="Page2_button">Go to page 2</string>
+    <string name="Page1_button">Go to page 1</string>
+    <string name="bye">See you next time</string>
+    <string name="Close">Close</string>
+    <string name="StatusTitle">Status</string>
+    <string name="hintText">Enter your text</string>
+    <string name="buttonUpdate">Submit</string>
+    <string name="statusSuccess">Your Status is updated</string>
+</resources>
