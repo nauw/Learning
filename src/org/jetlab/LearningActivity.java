@@ -1,4 +1,4 @@
-package be.jetlab.learning;
+package org.jetlab;
 
 import android.app.Activity;
 import android.graphics.Color;
@@ -16,7 +16,7 @@ import android.widget.Toast;
 import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 
-public class Learning3 extends Activity implements OnClickListener, TextWatcher {
+public class LearningActivity extends Activity implements OnClickListener, TextWatcher {
 	/** Called when the activity is first created. */
 
 	private static final String TAG = "StatusActivity";
@@ -28,7 +28,7 @@ public class Learning3 extends Activity implements OnClickListener, TextWatcher 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.status);
+		setContentView(R.layout.main);
 
 		editText = (EditText) findViewById(R.id.editText);
 		updateButton = (Button) findViewById(R.id.buttonUpdate);
@@ -69,7 +69,7 @@ public class Learning3 extends Activity implements OnClickListener, TextWatcher 
 		// Called once the background activity has completed
 		@Override
 		protected void onPostExecute(String result) { //
-			Toast.makeText(Learning3.this, result, Toast.LENGTH_LONG).show();
+			Toast.makeText(LearningActivity.this, result, Toast.LENGTH_LONG).show();
 			editText.setText("");
 		}
 
