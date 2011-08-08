@@ -8,9 +8,14 @@
     <string name="Page1_button">Go to page 1</string>
     <string name="bye">See you next time</string>
     <string name="Close">Close</string>
-    <string name="StatusTitle">Status</string>
+    <string name="StatusTitle">Learning Twitter</string>
     <string name="hintText">Enter your text</string>
     <string name="buttonUpdate">Submit</string>
     <string name="statusSuccess">Your Status is updated</string>
     <string name="loading">Loading...</string>
+    <string name="prefUsername">Username</string>
+    <string name="prefsUsername">Username</string>
+    <string name="prefsPassword">Password</string>
+    <string name="prefsApiUrl">Api URL</string>
+    <string name="prefsMenuTitle">Settings</string>
 </resources>

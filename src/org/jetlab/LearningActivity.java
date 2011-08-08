@@ -1,12 +1,19 @@
 package org.jetlab;
 
 import android.app.Activity;
+import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.SharedPreferences.OnSharedPreferenceChangeListener;
 import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
+import android.preference.PreferenceManager;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.widget.Button;
@@ -16,7 +23,7 @@ import android.widget.Toast;
 import winterwell.jtwitter.Twitter;
 import winterwell.jtwitter.TwitterException;
 
-public class LearningActivity extends Activity implements OnClickListener, TextWatcher {
+public class LearningActivity extends Activity implements OnClickListener, TextWatcher, OnSharedPreferenceChangeListener {
 	/** Called when the activity is first created. */
 
 	private static final String TAG = "StatusActivity";
@@ -24,6 +31,7 @@ public class LearningActivity extends Activity implements OnClickListener, TextW
 	Button updateButton;
 	Twitter twitter;
 	TextView textCount;
+	SharedPreferences prefs;
 
 	@Override
 	public void onCreate(Bundle savedInstanceState) {
@@ -34,9 +42,10 @@ public class LearningActivity extends Activity implements OnClickListener, TextW
 		updateButton = (Button) findViewById(R.id.buttonUpdate);
 
 		updateButton.setOnClickListener(this);
-
-		twitter = new Twitter("nauw", "tttttt");
-		twitter.setAPIRootUrl("http://yamba.marakana.com/api");
+		
+		prefs = PreferenceManager.getDefaultSharedPreferences(this);
+		prefs.registerOnSharedPreferenceChangeListener(this);
+		
 		Toast.makeText(getApplicationContext(), R.string.hello, 10).show();
 		
 		textCount = (TextView) findViewById(R.id.textCount);
@@ -44,12 +53,44 @@ public class LearningActivity extends Activity implements OnClickListener, TextW
 		textCount.setTextColor(Color.GREEN);
 		editText.addTextChangedListener(this);
 	}
+	
+	
+	
+
+	@Override
+	public boolean onCreateOptionsMenu(Menu menu) {
+		MenuInflater inflater = getMenuInflater();
+		inflater.inflate(R.menu.menu, menu);
+		return true;
+	}
+
+	
+	
+
+	@Override
+	public boolean onOptionsItemSelected(MenuItem item) {
+		switch(item.getItemId()){
+		case R.id.itemPrefs:
+			startActivity(new Intent(this,PrefsActivity.class));
+		break;
+		
+		case R.id.itemQuit:
+		closeHandler();
+		break;
+		
+		}
+	
+		return true;
+	}
+
+
+
 
 	// Async post Twitter
 	class PostToTwitter extends AsyncTask<String, Integer, String> {
 		protected String doInBackground(String... statuses) {
 			try {
-				Twitter.Status status = twitter.updateStatus(statuses[0]);
+				Twitter.Status status = getTwitter().updateStatus(statuses[0]);
 				return status.text;
 			} catch (TwitterException e) {
 				Log.e(TAG, e.toString());
@@ -102,7 +143,7 @@ public class LearningActivity extends Activity implements OnClickListener, TextW
 		
 	}
 	
-	public void closeHandler(View view) {
+	public void closeHandler() {
 		finish();
 	}
 
@@ -113,6 +154,25 @@ public class LearningActivity extends Activity implements OnClickListener, TextW
 
 	public void switchLayout() {
 		setContentView(R.layout.main);
+	}
+
+	
+	private Twitter getTwitter(){
+		if(twitter == null){
+			String username,password, api;
+			username = prefs.getString("username", "");
+			password = prefs.getString("password", "");
+			api = prefs.getString("api_url", "http://yamba.marakana.com/api");
+			
+			twitter = new Twitter(username,password);
+			twitter.setAPIRootUrl(api);
+		}
+		return twitter;
+	}
+
+	public void onSharedPreferenceChanged(SharedPreferences arg0, String arg1) {
+		twitter = null;
+		
 	}
 
 }
