@@ -1,10 +1,18 @@
 <?php
 
-phpinfo();
 
-public function Test(){
+Class MyTest
+{
 
-    echo 'this is my test';
+
+    function Test()
+    {
+        echo 'this is my test';
+        echo 'to be merged';
+    }
+
+
+
 }
 
-echo 'to be merged';
+?>
