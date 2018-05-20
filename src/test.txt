@@ -4,3 +4,5 @@ Hello World
 Coucou mélanie,
 
 comment vas-tu?
+
+THIS IS NOW IN THE IDE
