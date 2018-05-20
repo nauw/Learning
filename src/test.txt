@@ -6,3 +6,6 @@ Coucou mélanie,
 comment vas-tu?
 
 THIS IS NOW IN THE IDE
+
+
+This is the text to remove
