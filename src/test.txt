@@ -11,3 +11,6 @@ THIS IS NOW IN THE IDE
 This is the text to remove
 
 THIS IS WHAT I WANT TO GET
+
+
+THEN THIS IS MORE TO BE
